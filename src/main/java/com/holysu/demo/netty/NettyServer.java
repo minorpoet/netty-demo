@@ -22,6 +22,7 @@ public class NettyServer {
                     .channel(NioServerSocketChannel.class)  // 监听端口的 ServerSocketChannel
                     .option(ChannelOption.SO_BACKLOG, 1024)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline().addLast(new NettyServerHandler()); // 针对网络请求
                         }
