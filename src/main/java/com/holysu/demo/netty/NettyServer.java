@@ -25,6 +25,7 @@ public class NettyServer {
                     .option(ChannelOption.SO_SNDBUF, 262144) // 发送响应时候的缓冲区大小
                     .option(ChannelOption.TCP_NODELAY, true) // 避免打包合并响应才发出去
                     .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline().addLast(new NettyServerHandler()); // 针对网络请求
                         }
