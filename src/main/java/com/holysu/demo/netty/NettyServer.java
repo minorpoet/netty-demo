@@ -21,6 +21,9 @@ public class NettyServer {
                     .group(parentGroup, childGroup)
                     .channel(NioServerSocketChannel.class)  // 监听端口的 ServerSocketChannel
                     .option(ChannelOption.SO_BACKLOG, 1024)
+                    .option(ChannelOption.SO_RCVBUF, 262144) // 读取请求时候的缓冲区大小
+                    .option(ChannelOption.SO_SNDBUF, 262144) // 发送响应时候的缓冲区大小
+                    .option(ChannelOption.TCP_NODELAY, true) // 避免打包合并响应才发出去
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
